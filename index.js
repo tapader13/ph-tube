@@ -128,8 +128,10 @@ if (!search.value.trim()) {
 console.log(loadedVideos);
 const sort = document.getElementById('sort');
 sort.addEventListener('click', () => {
-  const sortedVideos = loadedVideos.sort((a, b) =>
-    a.title.localeCompare(b.title)
-  );
+  const sortedVideos = loadedVideos.sort((a, b) => {
+    const aViews = parseFloat(a?.others?.views.split('').slice(0, -1).join(''));
+    const bViews = parseFloat(b?.others?.views.split('').slice(0, -1).join(''));
+    return aViews - bViews;
+  });
   showVideos(sortedVideos);
 });
